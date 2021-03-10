@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/oooo.wav-f454ea94a957de9358e3b4264f92ed5c.sample"
+
+[deps]
+
+source_file="res://Assets/oooo.wav"
+dest_files=[ "res://.import/oooo.wav-f454ea94a957de9358e3b4264f92ed5c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

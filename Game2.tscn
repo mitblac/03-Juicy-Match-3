@@ -1,0 +1,169 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Assets/yummy.wav" type="AudioStream" id=1]
+[ext_resource path="res://UI/HUD.gd" type="Script" id=2]
+[ext_resource path="res://Assets/delicious.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/nomnom.wav" type="AudioStream" id=4]
+[ext_resource path="res://Grid/grid2.gd" type="Script" id=5]
+[ext_resource path="res://UI/Camera.gd" type="Script" id=6]
+[ext_resource path="res://Assets/music.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Assets/unnamed.png" type="Texture" id=8]
+[ext_resource path="res://Assets/cartoon-background_2614-47.jpg" type="Texture" id=9]
+[ext_resource path="res://Assets/oooo.wav" type="AudioStream" id=10]
+[ext_resource path="res://Pieces/Piece Background.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Hey Guys! Demo.otf" type="DynamicFontData" id=12]
+[ext_resource path="res://UI/Instructions.gd" type="Script" id=13]
+[ext_resource path="res://Assets/thought.png" type="Texture" id=14]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 12 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+font_data = ExtResource( 12 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 24
+font_data = ExtResource( 12 )
+
+[node name="Game" type="Node2D"]
+
+[node name="grid" type="Node2D" parent="."]
+script = ExtResource( 5 )
+width = 7
+height = 10
+xStart = 80
+yStart = 832
+offset = 70
+background = ExtResource( 11 )
+
+[node name="Bonus" type="Timer" parent="grid"]
+wait_time = 10.0
+autostart = true
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+script = ExtResource( 6 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 7 )
+volume_db = -7.0
+autoplay = true
+
+[node name="Apple" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="Orange" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
+[node name="Grapes" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Banana" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+
+[node name="HUD" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cartoon-background_2614-47" type="Sprite" parent="HUD"]
+position = Vector2( 80.0474, 296.829 )
+scale = Vector2( 2.35, 2.35 )
+texture = ExtResource( 9 )
+
+[node name="unnamed" type="Sprite" parent="HUD"]
+position = Vector2( 50.4067, 127.319 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
+
+[node name="thought" type="Sprite" parent="HUD"]
+position = Vector2( 210, 84 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 14 )
+
+[node name="Score" type="Label" parent="HUD"]
+margin_top = 30.0
+margin_right = 576.0
+margin_bottom = 70.0
+custom_fonts/font = SubResource( 1 )
+text = "Energy: "
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Time" type="Label" parent="HUD"]
+margin_right = 576.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 1 )
+text = "Time: "
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="HUD"]
+autostart = true
+
+[node name="Bonus" type="Node2D" parent="HUD"]
+
+[node name="Instructions" type="Control" parent="HUD"]
+pause_mode = 2
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="HUD/Instructions"]
+margin_right = 576.0
+margin_bottom = 1024.0
+color = Color( 0, 0, 0, 0.752941 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD/Instructions"]
+margin_left = 2.56054
+margin_top = -190.765
+margin_right = 578.56
+margin_bottom = 833.235
+custom_fonts/font = SubResource( 2 )
+text = "Level 2
+
+Chunky Monkey made it all the way to the Waterfall, but now he’s famished again! He’ll need more Energy to make it from the Waterfall to the top of Sunset Cliff, the next stop on the way to Miss Tangerine’s party.
+
+- Gain Energy by matching 3 fruits of the same kind. 
+- Gain Bonus Energy by matching the fruit that Chunky is craving.
+- Chunky needs 1500 Energy to get to Sunset Cliff."
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Countdown_label" type="Label" parent="HUD/Instructions"]
+margin_left = 2.56067
+margin_top = 204.849
+margin_right = 578.561
+margin_bottom = 1228.85
+custom_fonts/font = SubResource( 3 )
+text = "Starting in "
+align = 1
+valign = 1
+
+[node name="Countdown" type="Timer" parent="HUD/Instructions"]
+autostart = true
+[connection signal="timeout" from="grid/Bonus" to="grid" method="_on_Bonus_timeout"]
+[connection signal="timeout" from="HUD/Timer" to="HUD" method="_on_Timer_timeout"]
+[connection signal="timeout" from="HUD/Instructions/Countdown" to="HUD/Instructions" method="_on_Countdown_timeout"]
