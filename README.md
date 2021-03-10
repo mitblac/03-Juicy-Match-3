@@ -24,6 +24,7 @@ Animals sourced from:
 Tile Assets sourced from:
 - https://ioanago.itch.io/fruit-icons-ui
 - https://gamedeveloperstudio.itch.io/fruits-icon-pack
+- https://kenney.nl
 
 Music sourced from:
 - https://www.playonloop.com/2014-music-loops/baby-steps/
